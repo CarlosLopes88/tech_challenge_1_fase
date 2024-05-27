@@ -70,7 +70,7 @@ Este projeto tem como objetivo criar um sistema de controle de pedidos para uma 
 
     Abra seu navegador e vá para `http://localhost:3000/api-docs` para visualizar e interagir com a documentação da API.
 
-5. **Ports e Adapters Detalhados**
+## Ports e Adapters Detalhados:
 
 ## Driver Ports (Entradas)
 As rotas de API no Express representam os Driver Ports:
