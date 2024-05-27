@@ -4,6 +4,12 @@
 
 Este projeto tem como objetivo criar um sistema de controle de pedidos para uma lanchonete que está em expansão. Com esse sistema, a lanchonete pode gerenciar pedidos de maneira eficiente, garantindo que os clientes recebam seus pedidos corretamente e em tempo hábil.
 
+Dentro desse case foi desenvolvido uma analise utilizando as técnicaas de domain drive design (DDD) para entender dominios e subdominios encontrados no case, realizado também um event storming para desenho do que seria feito dentro da aplicação, além de desenvolver os grafos de agregados e contextos delimitados que estão disponiveis para consulta no link abaixo:
+
+### [Tech Chalenge DDD](https://miro.com/app/board/uXjVKR4zMmM=/);
+
+Foi desenvolvido um sistema de pedidos 
+
 ## Funcionalidades
 
 - **Gerenciamento de Clientes**:
@@ -182,4 +188,5 @@ Driven Port: Integração com o Mercado Pago.
 |-- dockerfile
 |-- package-lock.json
 |-- package.json
+|-- readme.md
 `-- .gitignore
