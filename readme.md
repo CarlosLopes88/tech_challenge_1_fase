@@ -70,6 +70,78 @@ Este projeto tem como objetivo criar um sistema de controle de pedidos para uma 
 
     Abra seu navegador e vá para `http://localhost:3000/api-docs` para visualizar e interagir com a documentação da API.
 
+5. **Ports e Adapters Detalhados**
+
+## Driver Ports (Entradas)
+As rotas de API no Express representam os Driver Ports:
+
+Cliente API: /api/cliente
+Pedido API: /api/pedido
+Produto API: /api/produto
+Pagamento API: /api/pagamento
+
+## Driven Ports (Saídas)
+Os repositórios e serviços externos representam os Driven Ports:
+
+Repositórios:
+Cliente: clienteRepository.js
+Pedido: pedidoRepository.js
+Produto: produtoRepository.js
+Pagamento: pagamentoRepository.js
+Serviço de Pagamento:
+Implementação para integração com o Mercado Pago.
+
+## Driver Adapters (Adaptadores de Entrada)
+Os controladores da API REST (Rotas do Express):
+
+clienteRoutes.js
+pedidoRoutes.js
+produtoRoutes.js
+pagamentoRoutes.js
+
+## Driven Adapters (Adaptadores de Saída)
+Os repositórios implementados com Mongoose e a integração com o serviço de pagamento:
+
+Repositórios:
+clienteRepository.js
+pedidoRepository.js
+produtoRepository.js
+pagamentoRepository.js
+Serviço de Pagamento:
+Integração simulada no código para o Mercado Pago (atualizar para integração real conforme necessidade).
+
+6. **Casos de Uso**
+
+## Criar Pedido:
+
+Driver Port: POST /api/pedido
+Use Case: Validação do pedido, cálculo do total, criação do pedido, envio para cozinha.
+Driven Port: pedidoRepository.js, integração com serviço de pagamento.
+
+## Atualizar Status do Pedido:
+
+Driver Port: PUT /api/pedido/{pedidoId}/status
+Use Case: Atualização do status do pedido.
+Driven Port: pedidoRepository.js
+
+## Registrar Cliente:
+
+Driver Port: POST /api/cliente
+Use Case: Validação e registro do cliente.
+Driven Port: clienteRepository.js
+
+## Gerenciar Produtos:
+
+Driver Port: POST, PUT, DELETE /api/produto
+Use Case: Adicionar, atualizar e excluir produtos.
+Driven Port: produtoRepository.js
+
+## Processar Pagamento:
+
+Driver Port: POST /api/pagamento
+Use Case: Processar o pagamento via QRCode do Mercado Pago.
+Driven Port: Integração com o Mercado Pago.
+
 ## Estrutura de Pastas
 
 ```plaintext
@@ -77,31 +149,32 @@ Este projeto tem como objetivo criar um sistema de controle de pedidos para uma 
 |-- /docs
 |    `-- openapi.yaml
 |-- /src
-|       |-- /application
-|       |
-|       |-- /config
-|       |   `-- dbconnect.js
-|       |-- /domain
-|       |   |-- /cliente
-|       |   |   |-- cliente.js
-|       |   |   `-- clienteRepository.js
-|       |   |-- /pagamento
-|       |   |   |-- pagamento.js
-|       |   |-- /pedido
-|       |   |   |-- pedido.js
-|       |   |   `-- pedidoRepository.js
-|       |   |-- /produto
-|       |       |-- produto.js
-|       |       `-- produtoRepository.js
-|       |-- /infrastructure
-|       |   `-- /web
-|       |       `-- server.js
-|       |-- /interfaces
-|           `-- /api
-|               |-- clienteRoutes.js
-|               |-- pagamentoRoutes.js
-|               |-- pedidoRoutes.js
-|               `-- produtoRoutes.js
+|   |-- /application
+|       |-- /services
+|           `-- pedidoService.js
+|   |-- /config
+|   |   `-- dbconnect.js
+|   |-- /domain
+|   |   |-- /cliente
+|   |   |   |-- cliente.js
+|   |   |   `-- clienteRepository.js
+|   |   |-- /pagamento
+|   |   |   |-- pagamento.js
+|   |   |-- /pedido
+|   |   |   |-- pedido.js
+|   |   |   `-- pedidoRepository.js
+|   |   |-- /produto
+|   |       |-- produto.js
+|   |       `-- produtoRepository.js
+|   |-- /infrastructure
+|   |   `-- /web
+|   |       `-- server.js
+|   |-- /interfaces
+|       `-- /api
+|           |-- clienteRoutes.js
+|           |-- pagamentoRoutes.js
+|           |-- pedidoRoutes.js
+|           `-- produtoRoutes.js
 |
 |-- /test
 |-- .env

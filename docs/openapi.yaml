@@ -148,16 +148,20 @@ paths:
         '404':
           description: Nenhum produto encontrado
     post:
-      summary: Cria um novo produto
+      summary: Cria um novo produto ou vários produtos
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Produto'
+              type: array
+              items:
+                $ref: '#/components/schemas/Produto'
       responses:
         '201':
-          description: Produto criado com sucesso
+          description: Produto(s) criado(s) com sucesso
+        '400':
+          description: Produtos não podem possuir o mesmo nome.
         '500':
           description: Erro no servidor
 
