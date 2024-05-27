@@ -1,0 +1,285 @@
+openapi: 3.0.0
+info:
+  title: Order System API
+  description: API para gerenciamento de pedidos, produtos e clientes em uma lanchonete.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /api/cliente:
+    get:
+      summary: Retorna todos os clientes
+      responses:
+        '200':
+          description: Lista de clientes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cliente'
+        '404':
+          description: Nenhum cliente encontrado
+    post:
+      summary: Cria um novo cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        '201':
+          description: Cliente criado com sucesso
+        '500':
+          description: Erro no servidor
+
+  /api/cliente/{clienteId}:
+    get:
+      summary: Retorna um cliente pelo ID
+      parameters:
+        - in: path
+          name: clienteId
+          schema:
+            type: string
+          required: true
+          description: ID do cliente
+      responses:
+        '200':
+          description: Cliente encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+        '404':
+          description: Cliente não encontrado
+        '500':
+          description: Erro no servidor
+
+  /api/pedido:
+    get:
+      summary: Retorna todos os pedidos
+      responses:
+        '200':
+          description: Lista de pedidos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pedido'
+        '404':
+          description: Nenhum pedido encontrado
+    post:
+      summary: Cria um novo pedido
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pedido'
+      responses:
+        '201':
+          description: Pedido criado com sucesso
+        '500':
+          description: Erro no servidor
+
+  /api/pedido/{pedidoId}:
+    get:
+      summary: Retorna um pedido pelo ID
+      parameters:
+        - in: path
+          name: pedidoId
+          schema:
+            type: string
+          required: true
+          description: ID do pedido
+      responses:
+        '200':
+          description: Pedido encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pedido'
+        '404':
+          description: Pedido não encontrado
+        '500':
+          description: Erro no servidor
+
+    put:
+      summary: Atualiza o status de um pedido pelo ID
+      parameters:
+        - in: path
+          name: pedidoId
+          schema:
+            type: string
+          required: true
+          description: ID do pedido
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                novoStatus:
+                  type: string
+      responses:
+        '200':
+          description: Pedido atualizado com sucesso
+        '404':
+          description: Pedido não encontrado
+        '500':
+          description: Erro no servidor
+
+  /api/produto:
+    get:
+      summary: Retorna todos os produtos
+      responses:
+        '200':
+          description: Lista de produtos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Produto'
+        '404':
+          description: Nenhum produto encontrado
+    post:
+      summary: Cria um novo produto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produto'
+      responses:
+        '201':
+          description: Produto criado com sucesso
+        '500':
+          description: Erro no servidor
+
+  /api/produto/{produtoId}:
+    get:
+      summary: Retorna um produto pelo ID
+      parameters:
+        - in: path
+          name: produtoId
+          schema:
+            type: string
+          required: true
+          description: ID do produto
+      responses:
+        '200':
+          description: Produto encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produto'
+        '404':
+          description: Produto não encontrado
+        '500':
+          description: Erro no servidor
+
+    put:
+      summary: Atualiza um produto pelo ID
+      parameters:
+        - in: path
+          name: produtoId
+          schema:
+            type: string
+          required: true
+          description: ID do produto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Produto'
+      responses:
+        '200':
+          description: Produto atualizado com sucesso
+        '404':
+          description: Produto não encontrado
+        '500':
+          description: Erro no servidor
+
+    delete:
+      summary: Exclui um produto pelo ID
+      parameters:
+        - in: path
+          name: produtoId
+          schema:
+            type: string
+          required: true
+          description: ID do produto
+      responses:
+        '200':
+          description: Produto excluído com sucesso
+        '404':
+          description: Produto não encontrado
+        '500':
+          description: Erro no servidor
+
+components:
+  schemas:
+    Cliente:
+      type: object
+      properties:
+        clienteId:
+          type: string
+        cpf:
+          type: string
+        nomeCliente:
+          type: string
+        email:
+          type: string
+        registrado:
+          type: boolean
+        dataRegistro:
+          type: string
+          format: date-time
+
+    Pedido:
+      type: object
+      properties:
+        pedidoId:
+          type: string
+        cliente:
+          type: string
+        produtos:
+          type: array
+          items:
+            type: object
+            properties:
+              produto:
+                type: string
+              quantidade:
+                type: number
+        total:
+          type: number
+        status:
+          type: string
+        datapedido:
+          type: string
+          format: date-time
+        statusPagamento:
+          type: string
+        pagamentoId:
+          type: string
+
+    Produto:
+      type: object
+      properties:
+        produtoId:
+          type: string
+        nomeProduto:
+          type: string
+        descricaoProduto:
+          type: string
+        precoProduto:
+          type: number
+        categoriaProduto:
+          type: string
