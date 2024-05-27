@@ -50,8 +50,8 @@ Foi desenvolvido um sistema de pedidos
 1. **Clone o Repositório**:
 
     ```sh
-    git clone https://github.com/seu-usuario/order_system.git
-    cd order_system
+    git clone https://github.com/seu-usuario/tech_challenge_1_fase.git
+    cd tech_challenge_1_fase
     ```
 
 2. **Configurar as Variáveis de Ambiente**:
