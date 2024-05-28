@@ -8,6 +8,23 @@ servers:
 
 paths:
   /api/cliente:
+    post:
+      summary: Cria um novo cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+            example:
+              cpf: "123.456.789-09"
+              nomeCliente: "Cogumelo Silva"
+              email: "Cogumelo.silva@example.com"
+      responses:
+        '201':
+          description: Cliente criado com sucesso
+        '500':
+          description: Erro no servidor
     get:
       summary: Retorna todos os clientes
       responses:
@@ -19,21 +36,15 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Cliente'
+              example:
+                - clienteId: "12345"
+                  cpf: "123.456.789-09"
+                  nomeCliente: "Cogumelo Silva"
+                  email: "Cogumelo.silva@example.com"
+                  registrado: true
+                  dataRegistro: "2023-05-01T12:00:00Z"
         '404':
           description: Nenhum cliente encontrado
-    post:
-      summary: Cria um novo cliente
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Cliente'
-      responses:
-        '201':
-          description: Cliente criado com sucesso
-        '500':
-          description: Erro no servidor
 
   /api/cliente/{clienteId}:
     get:
@@ -52,84 +63,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Cliente'
+              example:
+                clienteId: "12345"
+                cpf: "123.456.789-09"
+                nomeCliente: "Cogumelo Silva"
+                email: "Cogumelo.silva@example.com"
+                registrado: true
+                dataRegistro: "2023-05-01T12:00:00Z"
         '404':
           description: Cliente não encontrado
-        '500':
-          description: Erro no servidor
-
-  /api/pedido:
-    get:
-      summary: Retorna todos os pedidos
-      responses:
-        '200':
-          description: Lista de pedidos
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Pedido'
-        '404':
-          description: Nenhum pedido encontrado
-    post:
-      summary: Cria um novo pedido
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Pedido'
-      responses:
-        '201':
-          description: Pedido criado com sucesso
-        '500':
-          description: Erro no servidor
-
-  /api/pedido/{pedidoId}:
-    get:
-      summary: Retorna um pedido pelo ID
-      parameters:
-        - in: path
-          name: pedidoId
-          schema:
-            type: string
-          required: true
-          description: ID do pedido
-      responses:
-        '200':
-          description: Pedido encontrado
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Pedido'
-        '404':
-          description: Pedido não encontrado
-        '500':
-          description: Erro no servidor
-
-    put:
-      summary: Atualiza o status de um pedido pelo ID
-      parameters:
-        - in: path
-          name: pedidoId
-          schema:
-            type: string
-          required: true
-          description: ID do pedido
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                novoStatus:
-                  type: string
-      responses:
-        '200':
-          description: Pedido atualizado com sucesso
-        '404':
-          description: Pedido não encontrado
         '500':
           description: Erro no servidor
 
@@ -145,6 +87,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Produto'
+              example:
+                - produtoId: "23456"
+                  nomeProduto: "Hambúrguer"
+                  descricaoProduto: "Hambúrguer de carne 200g"
+                  precoProduto: 15.99
+                  categoriaProduto: "Lanche"
         '404':
           description: Nenhum produto encontrado
     post:
@@ -157,6 +105,23 @@ paths:
               type: array
               items:
                 $ref: '#/components/schemas/Produto'
+            example:
+              - nomeProduto: "Hambúrguer"
+                descricaoProduto: "Hambúrguer de carne 200g"
+                precoProduto: 15.99
+                categoriaProduto: "Lanche"
+              - nomeProduto: "Refrigerante"
+                descricaoProduto: "Refrigerante de cola 300ml"
+                precoProduto: 6.99
+                categoriaProduto: "Bebida"
+              - nomeProduto: "Fritas"
+                descricaoProduto: "Batata frita palito 300gr"
+                precoProduto: 8.99
+                categoriaProduto: "Acompanhamento"
+              - nomeProduto: "Torta de maçã"
+                descricaoProduto: "Fatia de torta de maçã 250gr"
+                precoProduto: 9.99
+                categoriaProduto: "Sobremesa"
       responses:
         '201':
           description: Produto(s) criado(s) com sucesso
@@ -182,6 +147,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Produto'
+              example:
+                produtoId: "23456"
+                nomeProduto: "Hambúrguer"
+                descricaoProduto: "Hambúrguer de carne 200g"
+                precoProduto: 15.99
+                categoriaProduto: "Lanche"
         '404':
           description: Produto não encontrado
         '500':
@@ -202,6 +173,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Produto'
+            example:
+              nomeProduto: "Batata Frita"
+              descricaoProduto: "Porção de batata frita"
+              precoProduto: 5.00
+              categoriaProduto: "Acompanhamento"
       responses:
         '200':
           description: Produto atualizado com sucesso
@@ -224,6 +200,146 @@ paths:
           description: Produto excluído com sucesso
         '404':
           description: Produto não encontrado
+        '500':
+          description: Erro no servidor
+
+  /api/produto/categoria/{categoria}:
+    get:
+      summary: Retorna produtos por categoria
+      parameters:
+        - in: path
+          name: categoria
+          schema:
+            type: string
+          required: true
+          description: Categoria do produto
+      responses:
+        '200':
+          description: Lista de produtos por categoria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Produto'
+              example:
+                - produtoId: "23456"
+                  nomeProduto: "Hambúrguer"
+                  descricaoProduto: "Hambúrguer de carne 200g"
+                  precoProduto: 15.99
+                  categoriaProduto: "Lanche"
+                - produtoId: "23457"
+                  nomeProduto: "Cheeseburger"
+                  descricaoProduto: "Hambúrguer de carne 200g com queijo"
+                  precoProduto: 17.99
+                  categoriaProduto: "Lanche"
+        '404':
+          description: Nenhum produto encontrado na categoria especificada
+        '500':
+          description: Erro no servidor
+
+  /api/pedido:
+    get:
+      summary: Retorna todos os pedidos
+      responses:
+        '200':
+          description: Lista de pedidos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pedido'
+              example:
+                - pedidoId: "67890"
+                  cliente: "12345"
+                  produtos:
+                    - produto: "23456"
+                      quantidade: 2
+                  total: 31.98
+                  status: "Recebido"
+                  datapedido: "2023-05-01T12:00:00Z"
+                  statusPagamento: "Aprovado"
+                  pagamentoId: "pagamento-123"
+        '404':
+          description: Nenhum pedido encontrado
+    post:
+      summary: Cria um novo pedido
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pedido'
+            example:
+              cliente: "12345"
+              produtos:
+                - produto: "23456"
+                  quantidade: 2
+      responses:
+        '201':
+          description: Pedido criado com sucesso
+        '500':
+          description: Erro no servidor
+
+  /api/pedido/{pedidoId}:
+    get:
+      summary: Retorna um pedido pelo ID
+      parameters:
+        - in: path
+          name: pedidoId
+          schema:
+            type: string
+          required: true
+          description: ID do pedido
+      responses:
+        '200':
+          description: Pedido encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pedido'
+              example:
+                pedidoId: "67890"
+                cliente: "12345"
+                produtos:
+                  - produto: "23456"
+                    quantidade: 2
+                total: 31.98
+                status: "Recebido"
+                datapedido: "2023-05-01T12:00:00Z"
+                statusPagamento: "Aprovado"
+                pagamentoId: "pagamento-123"
+        '404':
+          description: Pedido não encontrado
+        '500':
+          description: Erro no servidor
+
+    put:
+      summary: Atualiza o status de um pedido pelo ID
+      parameters:
+        - in: path
+          name: pedidoId
+          schema:
+            type: string
+          required: true
+          description: ID do pedido
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                novoStatus:
+                  type: string
+            example:
+              novoStatus: "Pronto"
+      responses:
+        '200':
+          description: Pedido atualizado com sucesso
+        '404':
+          description: Pedido não encontrado
         '500':
           description: Erro no servidor
 
