@@ -121,7 +121,7 @@ pagamentoRepository.js
 Serviço de Pagamento:  
 Integração simulada no código para o Mercado Pago (atualizar para integração real conforme necessidade).  
 
-6. **Casos de Uso**  
+## Casos de Uso
 
 ## Criar Pedido:  
 
