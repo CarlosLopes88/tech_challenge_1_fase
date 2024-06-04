@@ -81,42 +81,45 @@ Foi desenvolvido um sistema de pedidos
 ## Ports e Adapters Detalhados:
 
 ## Driver Ports (Entradas)
-As rotas de API no Express representam os Driver Ports:
+As rotas de API no Express representam os Driver Ports:  
 
-Cliente API: /api/cliente
-Pedido API: /api/pedido
-Produto API: /api/produto
-Pagamento API: /api/pagamento
+Cliente API: /api/cliente  
+Pedido API: /api/pedido  
+Produto API: /api/produto  
+Pagamento API: /api/pagamento  
 
 ## Driven Ports (Saídas)
-Os repositórios e serviços externos representam os Driven Ports:
+Os repositórios e serviços externos representam os Driven Ports:  
 
-Repositórios:
-Cliente: clienteRepository.js
-Pedido: pedidoRepository.js
-Produto: produtoRepository.js
-Pagamento: pagamentoRepository.js
-Serviço de Pagamento:
-Implementação para integração com o Mercado Pago.
+Repositórios:  
+Cliente: clienteRepository.js  
+Pedido: pedidoRepository.js  
+Produto: produtoRepository.js  
+Pagamento: pagamentoRepository.js  
+
+Serviço de Pagamento:  
+Implementação para integração com o Mercado Pago.  
 
 ## Driver Adapters (Adaptadores de Entrada)
 Os controladores da API REST (Rotas do Express):
 
-clienteRoutes.js
-pedidoRoutes.js
-produtoRoutes.js
-pagamentoRoutes.js
+clienteRoutes.js  
+pedidoRoutes.js  
+produtoRoutes.js  
+pagamentoRoutes.js  
 
-## Driven Adapters (Adaptadores de Saída)
-Os repositórios implementados com Mongoose e a integração com o serviço de pagamento:
+## Driven Adapters (Adaptadores de Saída)  
+Os repositórios implementados com Mongoose e a integração com o serviço de pagamento:  
 
-Repositórios:
-clienteRepository.js
-pedidoRepository.js
-produtoRepository.js
-pagamentoRepository.js
-Serviço de Pagamento:
-Integração simulada no código para o Mercado Pago (atualizar para integração real conforme necessidade).
+Repositórios:  
+
+clienteRepository.js  
+pedidoRepository.js  
+produtoRepository.js  
+pagamentoRepository.js  
+
+Serviço de Pagamento:  
+Integração simulada no código para o Mercado Pago (atualizar para integração real conforme necessidade).  
 
 6. **Casos de Uso**
 
