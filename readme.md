@@ -121,39 +121,39 @@ pagamentoRepository.js
 Serviço de Pagamento:  
 Integração simulada no código para o Mercado Pago (atualizar para integração real conforme necessidade).  
 
-6. **Casos de Uso**
+6. **Casos de Uso**  
 
-## Criar Pedido:
+## Criar Pedido:  
 
-Driver Port: POST /api/pedido
-Use Case: Validação do pedido, cálculo do total, criação do pedido, envio para cozinha.
-Driven Port: pedidoRepository.js, integração com serviço de pagamento.
+Driver Port: POST /api/pedido  
+Use Case: Validação do pedido, cálculo do total, criação do pedido, envio para cozinha.  
+Driven Port: pedidoRepository.js, integração com serviço de pagamento.  
 
-## Atualizar Status do Pedido:
+## Atualizar Status do Pedido:  
 
-Driver Port: PUT /api/pedido/{pedidoId}/status
-Use Case: Atualização do status do pedido.
-Driven Port: pedidoRepository.js
+Driver Port: PUT /api/pedido/{pedidoId}/status  
+Use Case: Atualização do status do pedido.  
+Driven Port: pedidoRepository.js  
 
-## Registrar Cliente:
+## Registrar Cliente:  
 
-Driver Port: POST /api/cliente
-Use Case: Validação e registro do cliente.
-Driven Port: clienteRepository.js
+Driver Port: POST /api/cliente  
+Use Case: Validação e registro do cliente.  
+Driven Port: clienteRepository.js  
 
-## Gerenciar Produtos:
+## Gerenciar Produtos:  
 
-Driver Port: POST, PUT, DELETE /api/produto
-Use Case: Adicionar, atualizar e excluir produtos.
-Driven Port: produtoRepository.js
+Driver Port: POST, PUT, DELETE /api/produto  
+Use Case: Adicionar, atualizar e excluir produtos.  
+Driven Port: produtoRepository.js  
 
-## Processar Pagamento:
+## Processar Pagamento:  
 
-Driver Port: POST /api/pagamento
-Use Case: Processar o pagamento via QRCode do Mercado Pago.
-Driven Port: Integração com o Mercado Pago.
+Driver Port: POST /api/pagamento  
+Use Case: Processar o pagamento via QRCode do Mercado Pago.  
+Driven Port: Integração com o Mercado Pago.  
 
-## Estrutura de Pastas
+## Estrutura de Pastas  
 
 ```plaintext
 /order_system
